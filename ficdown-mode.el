@@ -29,6 +29,24 @@
 
 ;;; Code:
 
+(require 'easymenu)
+
+(defvar ficdown-modehook nil
+  "Hook to be run upon engaging ficdown-mode.")
+
 (defvar ficdown-font-lock-keywords nil
   "set variable for font-lock-defaults")
 
+
+;;;###autoload
+ (define-derived-mode ficdown-mode markdown-mode "Ficdown"
+   "A major mode for editing Ficdown files."
+   :syntax-table ficdown-mode-syntax-table
+   (setq-local font-lock-defaults
+	'(ficdown-font-lock-keywords))
+   (setq-local imenu-generic-expression
+	ficdown-imenu-generic-expression)
+   (setq-local outline-regexp ficdown-outline-regexp))
+
+(provide ficdown-mode)
+;;; ficdown-mode ends here
